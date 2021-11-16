@@ -9,8 +9,48 @@
 <body>
     <?php
     $informacion = simplexml_load_file("ejercicio3.xml");
-    printf("Informacion sobre el libro 2:<br> AUTOR: %s <br> TÍTULO: %s <br> GÉNERO: %s <br> PRECIO: %s <br> FECHA PUBLICACIÓN: %s <br> DESCRIPCIÓN: %s", $informacion->book[1]->author , $informacion->book[1]->title, $informacion->book[1]->genre, $informacion->book[1]->price, $informacion->book[1]->publis_date, $informacion->book[1]->description);
+    printf ("Informacion libro 2: <br> AUTOR: %s <br> TITULO: %s <br> GENERO: %s <br> PRECIO: %s <br> PUBLICACION: %s <br> DESCRIPCION: %s <br> " , $informacion->book[1]->author, $informacion->book[1]->title, $informacion->book[1]->genre, $informacion->book[1]->price, $informacion->book[1]->publish_date, $informacion->book[1]->description);
     
+    printf ("<table border=1>");
+    printf ("<tr>");
+    printf ("<th>Titulo</th>" . "<th>Genero</th>" . "<th>Precio</th>") ;
+    printf ("</tr>");
+    
+    foreach($informacion as $book){
+        printf ("<tr>");
+        printf ("<td>%s</td>",$book->title);
+        printf ("<td>%s</td>",$book->genre);
+        printf ("<td>%s</td>",$book->price);
+        printf ("<tr>");
+    }
+
+    printf ("</table>");   
+
+    $book=$informacion->addChild("book");
+    $book->addAttribute("id","bk113");
+    $book->addChild("author","J.R.R. TOLKIEN");
+    $book->addChild("title","Las dos torres");
+    $book->addChild("genre","Fantasia");
+    $book->addChild("price","10.40");
+    $book->addChild("publish_date","1954-11-11");
+    $book->addChild("description","segundo volumen de la novela de fantasía heroica El Señor de los Anillos");
+    $informacion->asXML("datos.xml");
+
+    printf ("<table border=1>");
+    printf ("<tr>");
+    printf ("<th>Titulo</th>" . "<th>Genero</th>" . "<th>Precio</th>" );
+    printf ("</tr>");
+    
+    foreach($informacion as $book){
+        printf ("<tr>");
+        printf ("<td>%s</td>",$book->title);
+        printf ("<td>%s</td>",$book->genre);
+        printf ("<td>%s</td>",$book->price);
+        printf ("<tr>");
+    }
+    printf ("</table>");   
+
+?>
     ?>
 </body>
 </html>
